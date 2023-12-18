@@ -1,35 +1,35 @@
 # 注释的外观
 
-+ 第一行
-
-  ```json
-  "doxdocgen.c.firstLine": "/*******************************************************************************",
-  ```
-
-+ 最后一行
-
-  ```json
-  "doxdocgen.c.lastLine": " ******************************************************************************/"
-  ```
-
-+ 每一行
+```json
+    "doxdocgen.c.triggerSequence": "/**",
+    "doxdocgen.c.commentPrefix": " * ",
+    "doxdocgen.c.firstLine": "/**",
+    "doxdocgen.c.lastLine": " */",
+```
 
 # 注释关键字
 
 ## 通用关键字
 
 ```json
-"doxdocgen.generic.authorEmail": "roboxs@163.com",
-"doxdocgen.generic.authorName": "roboxs",
-"doxdocgen.generic.authorTag": "@author {author} ({email})",
-"doxdocgen.generic.dateFormat": "YYYY.MM.DD",
-"doxdocgen.generic.dateTemplate": "@date {date}",
+    "doxdocgen.generic.order": [
+        "brief",
+        "empty",
+        "param",
+        "return",
+    ],
+    "doxdocgen.generic.authorEmail": "roboxs@163.com",
+    "doxdocgen.generic.authorName": "roboxs",
+    "doxdocgen.generic.authorTag": "@author {author} ({email})",
+    "doxdocgen.generic.dateFormat": "YYYY.MM.DD",
+    "doxdocgen.generic.dateTemplate": "@date {date}",
+    "doxdocgen.generic.paramTemplate": "@param[in/out] {param} ",
+    "doxdocgen.generic.returnTemplate": "@return {type} ",
 ```
 
 ## 文件关键字
 
 ```json
-/*doxygen*/
 "doxdocgen.file.fileOrder": [
     "file",
     "author",
@@ -50,6 +50,3 @@
     "todo todo"
 ],
 ```
-
-
-
