@@ -231,3 +231,12 @@ int main()
 }
 ```
 
+# typeof
+
+从C23之后，作为C语言的标准的一部分。
+
+```c
+uint8 a_size = 0;
+typeof(a_size) b;
+```
+
