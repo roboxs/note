@@ -111,15 +111,122 @@ make -j 8 #并行执行8行，请参考《GNU make》5.4
 
 ​					参考链接：https://www.gnu.org/software/make/manual/make.html#Parallel-Disable
 
+## 生成库文件
+
++ 为什么编译时需要生成库文件
+
+  >有时候我们会有多个可执行文件，他们之间用到的某些功能是相同的，我们想把这些共用的功能做成一个库，方便大家一起共享
+  >
+  >库中的函数可以被可执行文件调用，也可以被其他库文件调用
+  >
+  >- 库文件又分为**静态库文件**和**动态库文件**：
+  >
+  >1. 其中静态库相当于直接把代码插入到生成的可执行文件中，会导致体积变大，同样的对库文件进行编译，但生成的可执行文件，不依赖库文件即可运行
+  >2. 而动态库则只在生成的可执行文件中生成“插桩”函数（汇编语言中的jump，指定跳转的位置），当可执行文件被加载时会读取指定目录中的.dll文件，加载到内存中空闲的位置，并且替换相应的“插桩”指向的地址为加载后的地址，这个过程称为**重定向**，这样以后函数被调用就会跳转到动态加载的地址去
+
+  ![image-20230317153348367](https://developer.qcloudimg.com/http-save/yehe-9645905/c7e70c51f600957742f3f6e7b7bc19ef.png)
+
++ 动态链接库是如何别调用的
+
+  参考：https://www.bilibili.com/video/BV1vB4y1V7gR/?spm_id_from=333.999.0.0&vd_sourc
+
++ window和linux的静态库和动态库后缀
+
+  window:静态库.lib 动态库.dll
+
+  linux:静态库.a 动态库.so
+
++ cmake如何生成库
+
+  ```cmake
+  add_library(libhello STATIC hello.c)#静态链接库
+  add_library(libhello SHARED hello.c)#动态链接库
+  ```
+
+  
+
++ 修改生成库文件名字
+
+  ```cmake
+  #目标名字对于整个工程来说是唯一的，因此生成库文件时名字前加上lib是为了防止编译时出现相同的目标名
+  #上述指令生成的库位liblibhello.a
+  set_target_properties(libhello PROPERTIES OUTPUT_NAME "hello") #重新设置静态链接库的名字
+  ```
+
 ## 多文件编译
 
+```cmake
+cmake_minimum_required(VERSION 3.5)
+project(HELLOC)
+set(CMAKE_EXE_LINKER_FLAGS "-Wl,-Map=output.map")
 
+add_library(libhello STATIC hello.c)    #生成静态库
+set_target_properties(libhello PROPERTIES OUTPUT_NAME "hello") #重新设置静态链接库的名字
+add_executable(main main.c)
+target_link_libraries(main libhello)    #静态库链接到exe文件
+```
 
 ## 多文件夹编译
 
+E:.
+│  CMakeLists.txt
+│  
+├─build
+├─hello
+│      CMakeLists.txt
+│      hello.c
+│      hello.h
+│      
+└─main
+        CMakeLists.txt
+        main.c
+
+windows下使用tree指令：
+
+```bat
+#一定要打开cmd或者powershell
+tree /f
+tree /f > tree.txt
+```
+
+./main/CMakeLists.txt:
+
+```cmake
+message("${PROJECT_SOURCE_DIR}/hello")
+include_directories(${PROJECT_SOURCE_DIR}/hello)
+add_executable(main main.c)
+target_link_libraries(main libhello)    #静态库链接到exe文件
+```
+
+./hello/CMakeLists.txt:
+
+```cmake
+add_library(libhello STATIC hello.c)    #生成静态库
+set_target_properties(libhello PROPERTIES OUTPUT_NAME "hello") #重新设置静态链接库的名字
+```
+
+./CMakeLists.txt
+
+```cmake
+cmake_minimum_required(VERSION 3.5)
+project(HELLOC)
+set(CMAKE_EXE_LINKER_FLAGS "-Wl,-Map=output.map")
+
+add_subdirectory(main)
+add_subdirectory(hello)
+```
 
 
 
+## 调试
+
+![Preprocessor](cmake.assets/Preprocessor.png)
+
+.i文件：预处理之后的文件，用于查看宏替换是否正确
+
+.s文件：汇编文件
+
+.map文件：函数编译之后的地址
 
 
 
