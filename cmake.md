@@ -348,3 +348,33 @@ tasks.json:
 
 }
 ```
+
+# CMake
+
+增加编译选项：
+
+```cmake
+#方法一：
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -save-temps=obj")#保存编译过程中的预编译.i文件
+#方法二：
+target_compile_options(<target> [BEFORE]
+    <INTERFACE|PUBLIC|PRIVATE> -save-temps=obj
+)#<target> must been created by add_executable() or add_library()
+```
+
+增加预处理宏定义：
+
+```cmake
+#方法一：
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DSTATIC=static")
+#方法二：
+target_compile_definitions(<target>
+    <INTERFACE|PUBLIC|PRIVATE> STATIC=static
+) #<target> must been created by add_executable() or add_library()
+```
+
+## 参考手册
+
+[Using the GNU Compiler Collection (GCC)](https://gcc.gnu.org/onlinedocs/gcc-12.1.0/gcc/)
+
+[CMake Reference Documentation](https://cmake.org/cmake/help/latest/index.html)
