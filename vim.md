@@ -29,3 +29,21 @@
 ## 剪切文本
 
 ## 粘贴文本
+
+## 复制粘贴文本到系统剪切板
+
+### 安装vim-gtk
+
+```shell
+vim --version | grep clipboard #检查vim是否支持剪切板
+#如果为+clipboard不需要执行下面指令，如果-clipboard需要安装vim-gtk
+sudo apt install vim-gtk
+```
+
+### 指令操作
+
+```shell
+#按v进入块选取，选中内容
++y #直接将内容复制到系统剪切板
+```
+
