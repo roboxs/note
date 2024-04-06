@@ -392,3 +392,34 @@ scp -P 22 source1 source2 destination
   全屏/取消全屏：ctrl+a；z
 
   挂起session：ctrl+a；d          唤醒session：tmux a
+
+## samba
+
+跨系统文件共享服务
+
+### 下载
+
+```shell
+sudo apt-get install samba samba-common
+```
+
+### 配置
+
+```shell
+sudo vim /etc/samba/smb.conf
+# 结尾增加以下内容
+[homes]
+   comment = public document
+   path = /home/codedu
+   public = no
+   browseable = no
+   writable = Yes
+```
+
+```shell
+sudo smbpasswd -a codedu #设置登录用户，确保linux下有该用户，然后设置密码用于windows登录
+```
+
+### win登录
+
+`win+r`，输入`\\192.168.40.128\codedu`，其中192.168.40.128为虚拟机IP地址，codedu为虚拟机用户名
