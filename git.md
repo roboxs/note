@@ -151,3 +151,10 @@ git访问是使用ssh的，所以需要密钥的
 ## todo
 
 `git cherry pick`指令
+
+
+
+
+
+## git repo
+
