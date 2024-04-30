@@ -156,5 +156,11 @@ git访问是使用ssh的，所以需要密钥的
 
 
 
-## git repo
+## git restore
+
+```sh
+git restore --stash . #restore the content in the index (staged area)
+```
+
+
 
