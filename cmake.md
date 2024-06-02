@@ -1,6 +1,28 @@
 # Windows
 
-## VsCode
+## 下载和配置MinGW-w64
+
+1.下载MSYS2, 链接：https://www.msys2.org/#installation
+
+2.打开MSYS2 terminal，输入一下指令
+
+```shell
+pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain
+#1.enter 选择全部
+#2.y 开始下载
+```
+
+3.配置系统环境变量`C:\msys64\ucrt64\bin`
+
+4.验证，打开git bash：`gcc --version`
+
+## 下载CMake
+
+https://cmake.org/download/
+
+
+
+## Task.json/Launch.json
 
 launch.json:
 
@@ -78,7 +100,10 @@ tasks.json:
         {
             "label": "run",
             "type": "shell",
-            "args": [ "./${workspaceFolderBasename}/build/main.exe" ],
+            "options": {
+                "cwd": "${workspaceRoot}/build"
+            },
+            "args": [ "./main/main.exe" ],
         },
         {
             "label": "echo", /*测试预定义变量*/
