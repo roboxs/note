@@ -10,8 +10,6 @@
 
 2、git merge --abort慎用
 
-
-
 3、如果有些操作失败，退回到曾经的版本，git reflog和git reset --hard HARD
 
 # malloc、calloc、realloc、alloca
@@ -238,5 +236,51 @@ int main()
 ```c
 uint8 a_size = 0;
 typeof(a_size) b;
+```
+
+## 顶层const和底层const
+
+> ==tips : 面对一条比较复杂的指针的声明语句时，从右向左阅读有助于弄清楚它的真实含义。==
+>
+> ==tips : 离变量名最近的符号对变量的类型有最直接的影响==
+
+```c
+/* Preliminaries */
+/* top-level const */
+int *const p1; /* const靠近p1, 说明p1是一个常量，而int*确定p1是什么类型的 */
+/* low-level const */
+const int *p1; /* *靠近p1, 说明p1是一个指针，而const int确定p1指向的是什么类型*/
+```
+
+```c
+/* routine 1 : x仅可作为右值 */
+void func(const int* const x)
+{
+    int a = 0;
+    int b = 0;
+    a = *x;
+    //x = &b; /* compile error, x的指向不可发生变化 */
+    //*x = b; /* compile error, 函数内认为x指向的内容为常量，所以不可发生变化 */
+}
+
+/* routine 2 : x可以作为右值，*x不可作为左值，x可以作为左值 */
+void func(const int *x)
+{
+    int a = 0;
+    int b = 0;
+    a = *x;
+    x = &b; /* x的指向可以发生变化 */
+    //*x = b; /* compile error, 函数内认为x指向的内容为常量，所以不可发生变化 */
+}
+
+/* routine 3 : x可以作为右值，*x可作为左值，x不可作为左值 */
+void func(int *const x)
+{
+    int a = 0;
+    int b = 0;
+    a = *x;
+    //x = &b; /* compile error, x的指向不可以发生变化 */
+    *x = b; /* 函数内认为x指向的内容为变量，所以可发生变化 */
+}
 ```
 
