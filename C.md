@@ -284,3 +284,12 @@ void func(int *const x)
 }
 ```
 
+```c
+/* 数组理解 */
+/* 用两个const修饰表明arr永远不会发生变化 */
+const char *const arr[] = {
+    "apple",
+    "orange"
+};
+```
+
