@@ -398,6 +398,34 @@ target_compile_definitions(<target>
 ) #<target> must been created by add_executable() or add_library()
 ```
 
+增加头文件路径：
+
+```cmake
+#target_include_directories只为指定目标包含头文件
+target_include_directories(<target> [SYSTEM] [AFTER|BEFORE] <INTERFACE|PUBLIC|PRIVATE> [items1...] [<INTERFACE|PUBLIC|PRIVATE> [items2...] ...])
+#include_directories会为当前以及之后子CMakeLists.txt添加目录，慎用
+include_directories([AFTER|BEFORE] [SYSTEM] dir1 [dir2 ...])
+```
+
+增加依赖：
+
+```cmake
+add_dependencies(<target> [<target-dependency>]...)
+```
+
+为什么target_link_directories item1和item2的先后顺序会有影响呢?
+
+```cmake
+target_link_directories(<target> [BEFORE] <INTERFACE|PUBLIC|PRIVATE> [items1...] [<INTERFACE|PUBLIC|PRIVATE> [items2...] ...])
+```
+
+了解一下cmake的变量范围，以及什么时候使用.cmake
+
+```cmake
+#父目录
+#子目录
+```
+
 ## 参考手册
 
 [Using the GNU Compiler Collection (GCC)](https://gcc.gnu.org/onlinedocs/gcc-12.1.0/gcc/)
