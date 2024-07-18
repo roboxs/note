@@ -413,6 +413,61 @@ include_directories([AFTER|BEFORE] [SYSTEM] dir1 [dir2 ...])
 add_dependencies(<target> [<target-dependency>]...)
 ```
 
+install指令：
+
+```cmake
+#cmake完成之后，需要在build目录中make install
+install(TARGETS <target>... [EXPORT <export-name>]
+        [RUNTIME_DEPENDENCIES <arg>...|RUNTIME_DEPENDENCY_SET <set-name>]
+        [<artifact-option>...]
+        [<artifact-kind> <artifact-option>...]...
+        [INCLUDES DESTINATION [<dir> ...]]
+)
+#<artifact-option>... :
+[DESTINATION <dir>]
+[PERMISSIONS <permission>...]
+[CONFIGURATIONS <config>...]
+[COMPONENT <component>]
+[NAMELINK_COMPONENT <component>]
+[OPTIONAL] [EXCLUDE_FROM_ALL]
+[NAMELINK_ONLY|NAMELINK_SKIP]
+#<artifact-kind> <artifact-option>... :
+ARCHIVE
+LIBRARY
+RUNTIME
+#例子：
+install(TARGETS hello main 
+    RUNTIME DESTINATION bin
+    ARCHIVE DESTINATION staticlib
+)
+
+#《CMAKE实践》：
+install(TARGETS targets...
+ [
+     [ARCHIVE|LIBRARY|RUNTIME]
+     [DESTINATION <dir>]
+     [PERMISSIONS permissions...]
+     [
+         CONFIGURATIONS [Debug|Release|...]
+     ]
+     [COMPONENT <component>]
+     [OPTIONAL]
+ ] [...])
+```
+
+定义一个INTERNAL类型的缓存变量：
+
+```cmake
+set(<variable> <value>... CACHE <type> <docstring> [FORCE])
+#type : BOOL/FILEPATH/PATH/STRING/INTERNAL
+#docstring: a quick summary of the option for cmake-gui
+
+set(HELLO_DIR
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    CACHE INTERNAL "define INTERNAL variable"
+)
+```
+
 为什么target_link_directories item1和item2的先后顺序会有影响呢?
 
 ```cmake
