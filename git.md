@@ -162,5 +162,12 @@ git访问是使用ssh的，所以需要密钥的
 git restore --stash . #restore the content in the index (staged area)
 ```
 
+## git commit
+
+```shell
+#当commit信息比较统一时，可以使用-t指令
+git commit -t <templete.txt>
+```
+
 
 
