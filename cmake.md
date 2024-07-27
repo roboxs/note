@@ -479,6 +479,7 @@ set_target_properties(${MODULE_NAME} PROPERTIES
     OUTPUT_NAME "hello"
     CLEAN_NO_CUSTOM 1
 )
+
 target_include_directories(${MODULE_NAME} PRIVATE ${HELLO_DIR})
 
 add_library(${MODULE_NAME}_static STATIC hello.c)
@@ -487,9 +488,8 @@ set_target_properties(${MODULE_NAME}_static PROPERTIES
     CLEAN_NO_CUSTOM 1
 )
 target_include_directories(${MODULE_NAME}_static PRIVATE ${HELLO_DIR})
+
 ```
-
-
 
 为什么target_link_directories item1和item2的先后顺序会有影响呢?
 
