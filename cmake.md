@@ -88,8 +88,7 @@ tasks.json:
                 "kind": "build",
                 "isDefault": true
             }
-        },
-        {
+        },        {
             "label": "build",           /*执行的总体任务，也就是名为Build的任务*/
             "dependsOrder": "sequence", /*按列出的顺序执行任务依赖项*/
             "dependsOn":[               /*执行总体任务的依赖为cmake和make*/
@@ -503,6 +502,17 @@ target_link_directories(<target> [BEFORE] <INTERFACE|PUBLIC|PRIVATE> [items1...]
 #父目录
 #子目录
 ```
+
+cmake使用正则表达式：
+
+```cmake
+#当文件中既又大小又有小写匹配时，可以使用[]
+set(INC_FILE ./[hH]ello/*.c)
+```
+
+
+
+
 
 ## 参考手册
 
