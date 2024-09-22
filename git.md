@@ -171,3 +171,13 @@ git commit -t <templete.txt>
 
 
 
+# git alias
+
+```shell
+# alias列表
+git config --global alias.br branch
+git config --global alias.st status
+```
+
+
+

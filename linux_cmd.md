@@ -174,3 +174,10 @@ echo ${PATH} | cut -d ':' -f 3,5 #cut是将一行的信息取出某部分，另�
 ls -l | grep "6月" #grep是分析一行信息，如果当中有所需信息，就将该行拿出来
 ```
 
+# alias
+
+```shell
+#bashrc, alias列表
+alias ..='cd ..'
+```
+
