@@ -367,43 +367,31 @@ scp -P 22 source1 source2 destination
 
 # tmux
 
-+ 作用：
-
-可以分屏操作服务器
-
-在tmux中执行命令，不会因为终端关闭使得命令停止
+ref: https://www.pragprog.com/titles/bhtmux2/tmux-2/
 
 ![image-20220625111048710](linux.assets/image-20220625111048710-1702577632843-12.png)
 
-+ tmux快捷键
+```shell
+#tmux 命令
+tmux attach-session -t target-session #恢复target-session
+tmux a #恢复最近session
+tmux source .tmux.conf #配置生效
+tmux kill-server -a #修改配置不生效时，先把kill tmux，然后重新执行配置生效
 
-  tmux的快捷键有一个前缀。
+#tmux 快捷键参考.tmux.conf
+```
 
-  垂直平分pane：ctrl+a；%
-
-  水平平分pane：ctrl+a；“
-
-  退出pane：ctrl+d
-
-  选中pane：ctrl+a；方向键
-
-  调整pane的大小：ctrl+a+方向键
-
-  全屏/取消全屏：ctrl+a；z
-
-  挂起session：ctrl+a；d          唤醒session：tmux a
-
-## samba
+# samba
 
 跨系统文件共享服务
 
-### 下载
+## 下载
 
 ```shell
 sudo apt-get install samba samba-common
 ```
 
-### 配置
+## 配置
 
 ```shell
 sudo vim /etc/samba/smb.conf
@@ -420,6 +408,6 @@ sudo vim /etc/samba/smb.conf
 sudo smbpasswd -a codedu #设置登录用户，确保linux下有该用户，然后设置密码用于windows登录
 ```
 
-### win登录
+## win登录
 
 `win+r`，输入`\\192.168.40.128\codedu`，其中192.168.40.128为虚拟机IP地址，codedu为虚拟机用户名
