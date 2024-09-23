@@ -365,22 +365,6 @@ scp -r /Downloads/hit roboxs:/home/pi#使用别名
 scp -P 22 source1 source2 destination
 ```
 
-# tmux
-
-ref: https://www.pragprog.com/titles/bhtmux2/tmux-2/
-
-![image-20220625111048710](linux.assets/image-20220625111048710-1702577632843-12.png)
-
-```shell
-#tmux 命令
-tmux attach-session -t target-session #恢复target-session
-tmux a #恢复最近session
-tmux source .tmux.conf #配置生效
-tmux kill-server -a #修改配置不生效时，先把kill tmux，然后重新执行配置生效
-
-#tmux 快捷键参考.tmux.conf
-```
-
 # samba
 
 跨系统文件共享服务

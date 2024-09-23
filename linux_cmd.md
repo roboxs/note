@@ -181,3 +181,30 @@ ls -l | grep "6月" #grep是分析一行信息，如果当中有所需信息，�
 alias ..='cd ..'
 ```
 
+# tmux
+
+ref: 
+
+https://www.pragprog.com/titles/bhtmux2/tmux-2/
+
+https://www.cnblogs.com/zuoruining/p/11074367.html
+
+conf: 
+
+https://github.com/gpakosz/.tmux
+
+https://gist.github.com/Godsing/c817baaeb44ceaaf57c91f047eaf5501
+
+https://github.com/zuorn/tmux.conf
+
+![image-20220625111048710](E:\note\linux_cmd.assets\image-20220625111048710-1702577632843-12.png)
+
+```shell
+#tmux 命令
+tmux attach-session -t target-session #恢复target-session
+tmux a #恢复最近session
+tmux source .tmux.conf #配置生效
+tmux kill-server -a #修改配置不生效时，先把kill tmux，然后重新执行配置生效
+
+#tmux 快捷键参考.tmux.conf
+```
