@@ -384,6 +384,8 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -save-temps=obj")#保存编译过程中的�
 target_compile_options(<target> [BEFORE]
     <INTERFACE|PUBLIC|PRIVATE> -save-temps=obj
 )#<target> must been created by add_executable() or add_library()
+
+-Wconversion #用于检测隐式转换带来的风险
 ```
 
 增加预处理宏定义：
