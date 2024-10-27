@@ -582,6 +582,17 @@ int main()
 
 
 
+## 字符串操作
+
+```c
+// c
+char s[100];
+fgets(s, 100, stdin); //读入一行
+// c++
+string str;
+getline(cin, str);
+```
+
 # 面向对象---类
 
 ## 虚函数表
